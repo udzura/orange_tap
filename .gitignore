@@ -1,0 +1,17 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+Gemfile.lock
+
+# Native extension build artifacts (see Rakefile's `compile` task)
+/ext/red_faucet/Makefile
+/ext/red_faucet/mkmf.log
+/ext/red_faucet/*.o
+/ext/red_faucet/*.bundle
+/ext/red_faucet/*.bundle.dSYM/
+/ext/red_faucet/*.so
