@@ -597,8 +597,20 @@ red_faucet/
 
 ---
 
-## 9. 将来課題（v1 スコープ外・明示的に先送り）
+## 9. 実装時に判明した既知の制約
 
+- **`define_method`/ブロックベースで定義したメソッドは `trace_method` の対象外。**
+  `RubyVM::InstructionSequence.of` は取得できる（`nil` にならない）が、そのISeqは
+  `:block` タイプであり、`TracePoint#enable(target:)` に渡すと
+  `ArgumentError: can not enable any hooks` になる（Ruby 4.0.5 で確認）。
+  現状は `UntraceableMethodError` 等で明示的に弾いておらず、`enable` 時に例外化するため、
+  README にこの制約を明記し、対象は `def` で定義された通常のメソッドに限定する。
+  ブロックベースメソッドの検出・早期エラー化は将来課題とする。
+
+## 10. 将来課題（v1 スコープ外・明示的に先送り）
+
+- `define_method`/ブロックベースメソッドを `register` 時点で検出し、
+  `UntraceableMethodError` を送出する（現状は `open` 時の `enable` で初めて失敗する）。
 - スレッド／Fiber／Ractor をまたぐ非同期処理の親子関係伝播
   （`Thread.current[:red_faucet_parent_span_id]` 等の context 伝播）。
 - 並行セッションで同一メソッドを共有する場合の二重フック解消
@@ -609,7 +621,7 @@ red_faucet/
 
 ---
 
-## 10. 参考
+## 11. 参考
 
 - 既存実装（Vivarium）: `file:///Users/uchio.kondo/ghq/github.com/udzura/vivarium`
   - OTLP/JSON フォーマット規約の参照元は `lib/vivarium/otel_exporter.rb`
