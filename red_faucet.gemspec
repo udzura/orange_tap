@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "lib/red_faucet_/version"
+require_relative "lib/red_faucet/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "red_faucet_"
+  spec.name = "red_faucet"
   spec.version = RedFaucet::VERSION
   spec.authors = ["Uchio Kondo"]
   spec.email = ["uchio.kondo@smarthr.co.jp"]

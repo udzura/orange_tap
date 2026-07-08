@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "red_faucet_/version"
+require_relative "red_faucet/version"
 
 module RedFaucet
   class Error < StandardError; end
